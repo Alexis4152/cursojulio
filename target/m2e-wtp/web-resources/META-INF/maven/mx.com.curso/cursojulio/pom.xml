@@ -46,6 +46,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+		<!-- DEPENDENCIAS PARA SPRINGFRAMEWOR  -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -96,7 +97,8 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		<!-- SPRING SECURITY -->
+		<!-- DEPENDENCIAS PARA SPRINGFRAMEWOR  -->
+		<!-- DEPENDENCIAS DE SPRING SECURITY -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
@@ -127,7 +129,8 @@
 			<artifactId>spring-security-acl</artifactId>
 			<version>${spring-security.version}</version>
 		</dependency>
-		<!-- SPRING SECURITY -->
+		<!-- DEPENDENCIAS DE SPRING SECURITY -->
+
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -149,11 +152,15 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- ENVIO DE CORREO -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
+				<!-- ENVIO DE CORREO -->
+
 		<dependency>
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
@@ -175,11 +182,15 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang.version}</version>
 		</dependency>
+
+		<!-- DEPENDENCIA PARA CONEXIÓN A ORACLE 11G -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>12.1.0.2</version>
 		</dependency>
+		<!-- DEPENDENCIA PARA CONEXIÓN A ORACLE 11G -->
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -190,12 +201,21 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
 		</dependency>
-		<!--  -->
+
+		<!-- DEPENDENCIA PARA CREAR EL LOG EN TU PROYECTO -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+
+		<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.18.0</version>
+</dependency>
+		<!-- DEPENDENCIA PARA CREAR EL LOG EN TU PROYECTO -->
+
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -248,11 +268,7 @@
 	    <artifactId>jaxws-api</artifactId>
 	    <version>2.2.6</version>
 	</dependency>
-<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.18.0</version>
-</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
