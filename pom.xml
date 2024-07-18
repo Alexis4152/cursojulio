@@ -184,11 +184,11 @@
 		</dependency>
 
 		<!-- DEPENDENCIA PARA CONEXIÓN A ORACLE 11G -->
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>12.1.0.2</version>
-		</dependency>
+		</dependency>  -->
 		<!-- DEPENDENCIA PARA CONEXIÓN A ORACLE 11G -->
 
 		<dependency>
