@@ -40,4 +40,55 @@ public class UserServiceImpl implements UserService {
 		return response;
 	}
 
+	@Override
+	public ResponseDto updateEmpleado(EmpleadoDto empleado) {
+		ResponseDto response = new ResponseDto();
+		Integer respuestInsert = userRepository.updateEmpleado(empleado);
+		
+		 if(respuestInsert == 1) {
+	    	 response.setCode(1);//esto es un comentario
+	    	 response.setMessage("Se actualizo el empleado");
+	     }
+		 else {
+	    	 response.setCode(0);
+	    	 response.setMessage("No se actualizo el empleado, favor de validar");
+	     }
+		return response;
+	}
+
+	@Override
+	public ResponseDto deleteEmpleado(EmpleadoDto empleado) {
+		ResponseDto response = new ResponseDto();
+		Integer respuestaDelete = userRepository.deleteEmpleado(empleado);
+		
+		 if(respuestaDelete == 1) {
+	    	 response.setCode(1);//esto es un comentario
+	    	 response.setMessage("Se eliminó al empleado");
+	     }
+		 else {
+	    	 response.setCode(0);
+	    	 response.setMessage("No se pudo eliminar al empleado, favor de validar");
+	     }
+		return response;
+	}
+
+	@Override
+	public ResponseDto getEmpleadoById(Integer idAlumno) {
+		ResponseDto response = new ResponseDto();
+		
+		EmpleadoDto empleadoRespuesta = userRepository.getEmpleadoById(idAlumno);
+		
+		if(empleadoRespuesta != null ) {
+			response.setCode(1);
+			response.setContent(empleadoRespuesta);
+			response.setMessage("Empleado obtenido");
+		}
+		else {
+			response.setCode(0);
+			response.setMessage("No se pudo obtener al empleado");
+		}
+		
+		return response;
+	}
+
 }

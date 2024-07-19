@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,6 +63,7 @@ public class ControllerPrincipal {
 		return new ResponseEntity <ResponseDto> (response, httpHeaders, HttpStatus.OK);	
 	}
 	
+	
 	@ResponseBody //NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
     @RequestMapping(value="/getUsers", method = RequestMethod.GET, produces = "application/json") //= select * from Aspirantes
 	ResponseEntity <List<EmpleadoDto>> getUser(){
@@ -74,5 +76,41 @@ public class ControllerPrincipal {
 		return new ResponseEntity <List<EmpleadoDto>> (empleados, httpHeaders, HttpStatus.OK);	
 	}
 	
+	
+	@ResponseBody //NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
+    @RequestMapping(value="/updateEmpleados", method = RequestMethod.PUT, produces = "application/json") //= select * from Aspirantes
+	ResponseEntity <ResponseDto> updateEmpleados(@RequestBody EmpleadoDto empleado){
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		ResponseDto response = new ResponseDto();
+		
+		response =  userService.updateEmpleado(empleado);
+	
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		return new ResponseEntity <ResponseDto> (response, httpHeaders, HttpStatus.OK);	
+	}
+	
+	@ResponseBody //NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
+    @RequestMapping(value="/deleteEmpleado", method = RequestMethod.DELETE, produces = "application/json") //= select * from Aspirantes
+	ResponseEntity <ResponseDto> deleteEmpleado(@RequestBody EmpleadoDto empleado){
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		ResponseDto response = new ResponseDto();
+		
+		response =  userService.deleteEmpleado(empleado);
+	
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		return new ResponseEntity <ResponseDto> (response, httpHeaders, HttpStatus.OK);	
+	}
+	
+	@ResponseBody //NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
+    @RequestMapping(value="/getEmpleadoById/{id}", method = RequestMethod.GET, produces = "application/json") //= select * from Aspirantes
+	ResponseEntity <ResponseDto> getEmpleadoById(@PathVariable("id") Integer idAlumno){
+		final HttpHeaders httpHeaders = new HttpHeaders();
+		ResponseDto response = new ResponseDto();
+		
+		response = userService.getEmpleadoById(idAlumno);
+	
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		return new ResponseEntity <ResponseDto> (response, httpHeaders, HttpStatus.OK);	
+	}
 }
 

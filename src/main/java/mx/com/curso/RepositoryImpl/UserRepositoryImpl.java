@@ -36,7 +36,25 @@ public class UserRepositoryImpl implements UserRepository {
         		new Object[] {empleado.getIdAlumno(), empleado.getNombre(), empleado.getSalario(), empleado.getEdad()} );
 	}
 
+	@Override
+	public Integer updateEmpleado(EmpleadoDto empleado) {
+	    jdbcTemplate.setDataSource(getDataSource());
+		return jdbcTemplate.update("UPDATE USUARIOS SET NOMBRE =?, SALARIO = ?, EDAD = ? WHERE ID_ALUMNO = ?"
+				, new Object[] {empleado.getNombre(), empleado.getSalario(), empleado.getEdad()} );
+	}
 	
+	@Override
+	public Integer deleteEmpleado(EmpleadoDto empleado) {
+		jdbcTemplate.setDataSource(getDataSource());
+		return jdbcTemplate.update("DELETE FROM USUARIOS WHERE ID_ALUMNO = ? ", new Object[] {empleado.getIdAlumno()} );
+	}
+
+
+	@Override
+	public EmpleadoDto getEmpleadoById(Integer idAlumno) {
+		jdbcTemplate.setDataSource(getDataSource());
+		return jdbcTemplate.queryForObject("SELECT * FROM USUARIOS WHERE ID_ALUMNO = ? ", new Object[] {idAlumno}, new EmpleadosMapper<EmpleadoDto>());
+	}
 
 	public DataSource getDataSource() {
 		return dataSource;
@@ -54,6 +72,9 @@ public class UserRepositoryImpl implements UserRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+
+	
+	
 
 
 

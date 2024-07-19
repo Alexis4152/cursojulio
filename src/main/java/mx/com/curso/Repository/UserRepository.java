@@ -10,4 +10,9 @@ public interface UserRepository {
 	
 	Integer insertEmpleado(EmpleadoDto empleado);
 	
+	Integer updateEmpleado(EmpleadoDto empleado);
+	
+	Integer deleteEmpleado(EmpleadoDto empleado);
+
+	EmpleadoDto getEmpleadoById(Integer idAlumno);
 }
