@@ -4,10 +4,19 @@ import java.math.BigDecimal;
 
 public class EmpleadoDto {
 
+	private Integer idAlumno;
 	private String nombre;
 	private Integer edad;
 	private BigDecimal salario;
 	
+	
+	
+	public Integer getIdAlumno() {
+		return idAlumno;
+	}
+	public void setIdAlumno(Integer idAlumno) {
+		this.idAlumno = idAlumno;
+	}
 	public String getNombre() {
 		return nombre;
 	}
