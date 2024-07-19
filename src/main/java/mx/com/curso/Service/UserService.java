@@ -11,4 +11,9 @@ public interface UserService {
 	
 	ResponseDto insertEmpleado(EmpleadoDto empleado);
 	
+	ResponseDto updateEmpleado(EmpleadoDto empleado);
+	
+	ResponseDto deleteEmpleado(EmpleadoDto empleado);
+
+	ResponseDto getEmpleadoById(Integer idAlumno);
 }
