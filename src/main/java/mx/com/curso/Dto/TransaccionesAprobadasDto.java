@@ -1,11 +1,10 @@
 package mx.com.curso.Dto;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 
-public class TransaccionesDto {
-	private BigInteger idTransaccion;
+public class TransaccionesAprobadasDto {
+	private Integer idTransaccion;
 	private Date fecha;
 	private BigDecimal cantidad;
 	private String moneda;
@@ -14,14 +13,13 @@ public class TransaccionesDto {
 	private String concepto;
 	private String nombreSucursalEmisor;
 	private String nombreSucursalReceptor;
-	private Integer idCuentaTransaccion;
-	private Integer idStatusTransaccion; 
-	private String nombreT;
+	private Integer idCuentaTransaccion; 
+	private String nombreStatusTransaccion;
 	
-	public BigInteger getIdTransaccion() {
+	public Integer getIdTransaccion() {
 		return idTransaccion;
 	}
-	public void setIdTransaccion(BigInteger idTransaccion) {
+	public void setIdTransaccion(Integer idTransaccion) {
 		this.idTransaccion = idTransaccion;
 	}
 	public Date getFecha() {
@@ -71,25 +69,17 @@ public class TransaccionesDto {
 	}
 	public void setNombreSucursalReceptor(String nombreSucursalReceptor) {
 		this.nombreSucursalReceptor = nombreSucursalReceptor;
-	}	
-	
+	}
 	public Integer getIdCuentaTransaccion() {
 		return idCuentaTransaccion;
 	}
 	public void setIdCuentaTransaccion(Integer idCuentaTransaccion) {
 		this.idCuentaTransaccion = idCuentaTransaccion;
 	}
-	public Integer getIdStatusTransaccion() {
-		return idStatusTransaccion;
+	public String getNombreStatusTransaccion() {
+		return nombreStatusTransaccion;
 	}
-	public void setIdStatusTransaccion(Integer idStatusTransaccion) {
-		this.idStatusTransaccion = idStatusTransaccion;
+	public void setNombreStatusTransaccion(String nombreStatusTransaccion) {
+		this.nombreStatusTransaccion = nombreStatusTransaccion;
 	}
-	public String getNombreT() {
-		return nombreT;
-	}
-	public void setNombreT(String nombreT) {
-		this.nombreT = nombreT;
-	}
-	
 }
