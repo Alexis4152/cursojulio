@@ -12,6 +12,7 @@ public class EmpleadosMapper<T> implements RowMapper<EmpleadoDto>{
 		EmpleadoDto registro = new EmpleadoDto();
 		registro.setIdAlumno(rs.getInt("ID_ALUMNO"));
 		registro.setNombre(rs.getString("NOMBRE"));
+		registro.setNombre(rs.getString("APELLIDO"));
 		registro.setEdad(rs.getInt("EDAD"));
 		registro.setSalario(rs.getBigDecimal("SALARIO"));
 		return registro;

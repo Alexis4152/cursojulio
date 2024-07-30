@@ -53,7 +53,7 @@ public class ControllerPrincipal {
 	@ResponseBody // NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
 	@RequestMapping(value = "/insertEmpleados", method = RequestMethod.POST, produces = "application/json") // = select
 																											// * from
-																											// Aspirantes
+																								// Aspirantes
 	ResponseEntity<ResponseDto> insertEmpleados(@RequestBody EmpleadoDto empleado) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		ResponseDto response = new ResponseDto();
@@ -65,8 +65,7 @@ public class ControllerPrincipal {
 	}
 
 	@ResponseBody // NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
-	@RequestMapping(value = "/getUsers", method = RequestMethod.GET, produces = "application/json") // = select * from
-																									// Aspirantes
+	@RequestMapping(value = "/getUsers", method = RequestMethod.GET, produces = "application/json") // = select * from																								// Aspirantes
 	ResponseEntity<List<EmpleadoDto>> getUser() {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		List<EmpleadoDto> empleados = new ArrayList<>();
@@ -107,11 +106,8 @@ public class ControllerPrincipal {
 	}
 
 	@ResponseBody // NOS PERMITE RETORNAR UNICAMENTE DATOS, Y NO UNA VISTA
-	@RequestMapping(value = "/getEmpleadoById/{id}", method = RequestMethod.GET, produces = "application/json") // =
-																												// select
-																												// *
-																												// from
-																												// Aspirantes
+	@RequestMapping(value = "/getEmpleadoById/{id}", method = RequestMethod.GET, produces = "application/json") 
+																												
 	ResponseEntity<ResponseDto> getEmpleadoById(@PathVariable("id") Integer idAlumno) {
 		final HttpHeaders httpHeaders = new HttpHeaders();
 		ResponseDto response = new ResponseDto();
@@ -121,4 +117,6 @@ public class ControllerPrincipal {
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		return new ResponseEntity<ResponseDto>(response, httpHeaders, HttpStatus.OK);
 	}
+	
+	
 }
