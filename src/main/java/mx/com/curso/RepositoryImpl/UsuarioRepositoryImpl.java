@@ -25,12 +25,20 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
 		
 		
-		@Override
+		/*@Override
 		public List<UsuariosDto> getUsers() {
 			jdbcTemplate.setDataSource(getDataSource());
 			return jdbcTemplate.query("SELECT  * FROM USUARIOS", new UsuariosMapper<UsuariosDto>());
 		}
-
+*/
+		@Override
+		public List<UsuariosDto> getUsers() {
+			jdbcTemplate.setDataSource(getDataSource());
+			return jdbcTemplate.query("SELECT U.ID_USUARIO,U.NOMBRE,U.APELLIDO,U.EDAD,U.NUMERO_CUENTA,U.BANCO,U.TELEFONO,U.CORREO_ELECTRONICO,U.ESTADO_USUARIO,B.NOMBRE_STATUS FROM USUARIOS U" 
+							+ "LEFT JOIN STATUS_USER B "
+							+ "ON U.ID_STATUS = B.ID_STATUS",
+					new UsuariosMapper<UsuariosDto>());
+		}
 		
 		/// insertar 
 		@Override

@@ -20,8 +20,6 @@ public class StatusUserServiceImpl implements StatusUserService {
 
 	@Autowired
 	private StatusUserRepository StatusUserRepository;
-	@Autowired
-	private TransaccionService transaccionService;
 	
 	@Autowired
 	private UsuarioRepository UsuarioRepository;

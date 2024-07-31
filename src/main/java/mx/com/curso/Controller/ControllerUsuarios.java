@@ -58,24 +58,7 @@ public class ControllerUsuarios {
 	
 }
 	
-	@ResponseBody 
-    @RequestMapping(value="/insertUsuarios", method = RequestMethod.POST, produces = "application/json") 
-	ResponseEntity <ResponseDto> insertUsuarios(@RequestBody UsuariosDto Usuario){
-		final HttpHeaders httpHeaders = new HttpHeaders();
-		ResponseDto response = new ResponseDto();
-		List<UsuariosDto> Usuarios = new ArrayList<>();
 
-		response.setCode(500);
-		response.setMessage("Usuario  insertado");
-	
-		Usuarios.add(Usuario);
-		
-		response.setContent(Usuarios);
-	
-		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		return new ResponseEntity <ResponseDto> (response, httpHeaders, HttpStatus.OK);	
-	}
-	
 	 @RequestMapping(value="/InsertUsuarios", method = RequestMethod.POST, produces = "application/json") 
 		ResponseEntity <ResponseDto> InsertUsuarios(@RequestBody UsuariosDto status){
 			final HttpHeaders httpHeaders = new HttpHeaders();

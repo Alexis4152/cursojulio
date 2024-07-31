@@ -22,6 +22,7 @@ public class UsuariosMapper <T> implements RowMapper<UsuariosDto> {
 		registro.setTelefono(rs.getLong("TELEFONO"));
 		registro.setDireccionCorreoElectronico(rs.getString("CORREO_ELECTRONICO"));
 		registro.setEstadoUsuario(rs.getString("ESTADO_USUARIO"));
+		registro.setNombreStatus(rs.getString("NOMBRE_STATUS"));
 		return registro;
 	}
 

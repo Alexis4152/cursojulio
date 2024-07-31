@@ -13,11 +13,18 @@ public class UsuariosDto {
 	private Long telefono;
 	private String direccionCorreoElectronico;
 	private String estadoUsuario;
-
+	private String NombreStatus;
+	
 
 	  
 	 
 	
+	public String getNombreStatus() {
+		return NombreStatus;
+	}
+	public void setNombreStatus(String nombreStatus) {
+		NombreStatus = nombreStatus;
+	}
 	public Long getIdUsuario() {
 		return idUsuario;
 	}
