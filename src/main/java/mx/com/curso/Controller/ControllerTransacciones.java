@@ -54,7 +54,7 @@ public class ControllerTransacciones {
 			transacciones.add(transac1);
 			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
 		}
 		return ResponseEntity.ok().headers(httpHeaders).body(transacciones);
 	}
