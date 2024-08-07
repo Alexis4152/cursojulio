@@ -4,6 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import mx.com.curso.Dto.UsuariosAdminDto;
 import mx.com.curso.Entidades.UsuariosAdmin;
@@ -26,7 +27,8 @@ public class UsuariosAdminDAOImpl extends GenericDAO<UsuariosAdmin, Long> implem
 		
 		return (List<UsuariosAdmin>) criteria.list(); // --> retorna una lista de usuarios
 	}
-	
+
+
 	/* 
 	 * JDBCTEMPLATE
 	 * 1.- simple, sencillo, eficiente, y funcional
@@ -39,6 +41,26 @@ public class UsuariosAdminDAOImpl extends GenericDAO<UsuariosAdmin, Long> implem
 	 * 
 	 */
 	
+	
+	
+	@Override
+	@SuppressWarnings("unchecked")// Quitar las advertencias (son las lineas amarillas)
+	@Transactional // transacciones, es como el commit en oracle -> create, update, delete -> Es lo equivalente a un commit en oracle (Confirmar los cambios)
+	public UsuariosAdmin obtieneUsuarioPorId(UsuariosAdminDto datos) {
+		
+		final Session session = sessionFactory.getCurrentSession();
+		final Criteria criteria = session.createCriteria(UsuariosAdmin.class);// --> select * from +UsuariosAdmin
+		
+		criteria.add(Restrictions.eq("idUser", datos.getIdUser())); // -> where id_user = ?;
+		
+//		criteria.add(Restrictions.eq("estado", datos.getIdUser())); // -> where estado = 5;
+//		criteria.add(Restrictions.eq("rol", datos.getIdUser())); // -> where rol = 5;
+//		criteria.add(Restrictions.eq("edad", datos.getIdUser())); // -> where edad = 5;
+		
+		// select * from tabla where id_user = ?;
+		
+		return (UsuariosAdmin) criteria.uniqueResult(); // --> retorna una lista de usuarios
+	}
 	
 	
 	
