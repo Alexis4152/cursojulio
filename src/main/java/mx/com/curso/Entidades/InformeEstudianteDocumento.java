@@ -48,10 +48,6 @@ public class InformeEstudianteDocumento {
 	private String nombreDocumento;
 	
 	@Id
-	@Column(name = "DOCUMENTO")
-	private byte[] documento;
-	
-	@Id
 	@Column(name = "FECHA_REGISTRO")
 	private Timestamp fechaRegistro;
 
@@ -126,14 +122,6 @@ public class InformeEstudianteDocumento {
 
 	public void setNombreDocumento(String nombreDocumento) {
 		this.nombreDocumento = nombreDocumento;
-	}
-
-	public byte[] getDocumento() {
-		return documento;
-	}
-
-	public void setDocumento(byte[] documento) {
-		this.documento = documento;
 	}
 
 	public Timestamp getFechaRegistro() {

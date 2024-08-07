@@ -13,7 +13,6 @@ public class InformeEstudianteDocumentoDto {
 	private short numeroCatedraDto;
 	private String cveTipoDocumentoDto;
 	private String nombreDocumentoDto;
-	private byte[] documentoDto;
 	private Timestamp fechaRegistroDto;
 	
 	public Long getIdInformeDto() {
@@ -69,12 +68,6 @@ public class InformeEstudianteDocumentoDto {
 	}
 	public void setNombreDocumentoDto(String nombreDocumentoDto) {
 		this.nombreDocumentoDto = nombreDocumentoDto;
-	}
-	public byte[] getDocumentoDto() {
-		return documentoDto;
-	}
-	public void setDocumentoDto(byte[] documentoDto) {
-		this.documentoDto = documentoDto;
 	}
 	public Timestamp getFechaRegistroDto() {
 		return fechaRegistroDto;
