@@ -10,5 +10,7 @@ public interface UsuariosAdminDAO extends DAO<UsuariosAdmin, Long> {
 	
 	
 	List<UsuariosAdmin> obtieneListaUsuarios();
+	
+	UsuariosAdmin obtieneUsuarioPorId(UsuariosAdminDto datos);
 
 }
