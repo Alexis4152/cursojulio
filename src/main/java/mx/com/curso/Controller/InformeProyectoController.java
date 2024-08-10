@@ -1,6 +1,10 @@
 package mx.com.curso.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +34,12 @@ public class InformeProyectoController {
 	}
 	
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/nuevoInforme", method = RequestMethod.POST, produces = "application/json")
+	ResponseDto insertInformeProyecto(@RequestBody InformeProyectoDTO datosInforme) {
+		
+		return informeProyectoService.registrarNuevoInforme(datosInforme);
+	}
 	
 	
 	

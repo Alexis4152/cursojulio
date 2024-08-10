@@ -6,6 +6,22 @@ public class ResponseDto {
 	private Integer code;
 	private String message;
 	
+	
+	public ResponseDto() {
+		
+	}
+	
+	public ResponseDto(Object content, Integer code, String message) {
+		this.content = content;
+		this.code = code;
+		this.message = message;
+	}
+
+	public ResponseDto(Integer code, String message) {
+		this.code = code;
+		this.message = message;
+	}
+
 	public Object getContent() {
 		return content;
 	}
@@ -24,7 +40,5 @@ public class ResponseDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
-	
 	
 }

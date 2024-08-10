@@ -7,4 +7,6 @@ public interface InformeProyectoService {
 
 	ResponseDto getInformesByIdRead(InformeProyectoDTO datos);
 
+	ResponseDto registrarNuevoInforme(InformeProyectoDTO datosInforme);
+
 }
