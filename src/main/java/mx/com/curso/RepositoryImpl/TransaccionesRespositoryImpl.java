@@ -31,8 +31,8 @@ public class TransaccionesRespositoryImpl implements TransaccionesRepository {
 		return jdbcTemplate.query(
 				"SELECT A.ID_TRANSACCION, A.FECHA, A.MONTO, A.MONEDA, A.METODO_PAGO, A.DETALLE_PAGO, A.CONCEPTO, A.NOMBRE_SUCURSAL_EMISOR, "
 						+ "A.NOMBRE_SUCURSAL_RECEPTOR, A.ID_USUARIO, B.NOMBRE_STATUS_TRANSACCION "
-						+ "FROM TRANSACCIONES A " 
-						+ "LEFT JOIN STATUSTRANSACCIONES B "
+						+ "FROM ADMIN1.TRANSACCIONES A " 
+						+ "LEFT JOIN ADMIN1.STATUSTRANSACCIONES B "
 						+ "ON A.ID_STATUS_TRANSACCION = B.ID_STATUS_TRANSACCION",
 				new TransaccionesAprobadasMapper<TransaccionesAprobadasDto>());
 	}
@@ -40,13 +40,13 @@ public class TransaccionesRespositoryImpl implements TransaccionesRepository {
 	@Override
 	public Integer insertTransaccion(TransaccionesDto transaccion) {
 		jdbcTemplate.setDataSource(getDataSource());
-		Integer nextId = jdbcTemplate.queryForObject("SELECT SEQ_TRANSACCIONES.NEXTVAL FROM DUAL", Integer.class);
+		Integer nextId = jdbcTemplate.queryForObject("SELECT ADMIN1.SEQ_TRANSACCIONES.NEXTVAL FROM DUAL", Integer.class);
 		
 		LocalDateTime fechaActual = LocalDateTime.now();
 		LocalDate fecha = LocalDate.from(fechaActual.atZone(ZoneId.systemDefault()));
 
 		return jdbcTemplate.update(
-				"INSERT INTO TRANSACCIONES (ID_TRANSACCION,FECHA,MONTO,MONEDA,METODO_PAGO,DETALLE_PAGO,CONCEPTO,NOMBRE_SUCURSAL_EMISOR,NOMBRE_SUCURSAL_RECEPTOR,ID_USUARIO,ID_STATUS_TRANSACCION)"
+				"INSERT INTO ADMIN1.TRANSACCIONES (ID_TRANSACCION,FECHA,MONTO,MONEDA,METODO_PAGO,DETALLE_PAGO,CONCEPTO,NOMBRE_SUCURSAL_EMISOR,NOMBRE_SUCURSAL_RECEPTOR,ID_USUARIO,ID_STATUS_TRANSACCION)"
 						+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
 				new Object[] { nextId, fecha, transaccion.getCantidad(), transaccion.getMoneda(),
 						transaccion.getMetodoPago(), transaccion.getDetallePago(), transaccion.getConcepto(),
@@ -59,7 +59,7 @@ public class TransaccionesRespositoryImpl implements TransaccionesRepository {
 		jdbcTemplate.setDataSource(getDataSource());
 
 		return jdbcTemplate.update(
-				"UPDATE TRANSACCIONES SET FECHA = ?,MONTO = ?,MONEDA = ?,METODO_PAGO = ?,DETALLE_PAGO = ?,CONCEPTO = ?,NOMBRE_SUCURSAL_EMISOR = ?,NOMBRE_SUCURSAL_RECEPTOR = ?,"
+				"UPDATE ADMIN1.TRANSACCIONES SET FECHA = ?,MONTO = ?,MONEDA = ?,METODO_PAGO = ?,DETALLE_PAGO = ?,CONCEPTO = ?,NOMBRE_SUCURSAL_EMISOR = ?,NOMBRE_SUCURSAL_RECEPTOR = ?,"
 						+ "ID_USUARIO = ?,ID_STATUS_TRANSACCION = ? WHERE ID_TRANSACCION = ?",
 				new Object[] { transaccion.getFecha(), transaccion.getCantidad(), transaccion.getMoneda(),
 						transaccion.getMetodoPago(), transaccion.getDetallePago(), transaccion.getConcepto(),
@@ -72,7 +72,7 @@ public class TransaccionesRespositoryImpl implements TransaccionesRepository {
 	public Integer deleteTransaccion(TransaccionesDto transaccion) {
 		jdbcTemplate.setDataSource(getDataSource());
 
-		return jdbcTemplate.update("DELETE FROM TRANSACCIONES WHERE ID_TRANSACCION = ?",
+		return jdbcTemplate.update("DELETE FROM ADMIN1.TRANSACCIONES WHERE ID_TRANSACCION = ?",
 				new Object[] { transaccion.getIdTransaccion() });
 	}
 
@@ -84,8 +84,8 @@ public class TransaccionesRespositoryImpl implements TransaccionesRepository {
 			result = jdbcTemplate.queryForObject(
 					"SELECT A.ID_TRANSACCION, A.FECHA, A.MONTO, A.MONEDA, A.METODO_PAGO, A.DETALLE_PAGO, A.CONCEPTO, "
 							+ "A.NOMBRE_SUCURSAL_EMISOR, A.NOMBRE_SUCURSAL_RECEPTOR, A.ID_USUARIO, B.NOMBRE_STATUS_TRANSACCION "
-							+ "FROM TRANSACCIONES A " 
-							+ "LEFT JOIN STATUSTRANSACCIONES B "
+							+ "FROM ADMIN1.TRANSACCIONES A " 
+							+ "LEFT JOIN ADMIN1.STATUSTRANSACCIONES B "
 							+ "ON A.ID_STATUS_TRANSACCION = B.ID_STATUS_TRANSACCION " 
 							+ "WHERE A.ID_TRANSACCION = ?",
 					new Object[] { idTransaccion }, new TransaccionesAprobadasMapper<TransaccionesAprobadasDto>());

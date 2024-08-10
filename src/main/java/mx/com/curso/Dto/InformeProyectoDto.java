@@ -3,8 +3,9 @@ package mx.com.curso.Dto;
 import java.sql.Timestamp;
 
 
-public class InformeProyectoDto {
 
+public class InformeProyectoDto {
+	
 	private Long idInforme;
 	private short idProyecto;
 	private short anio;
@@ -17,6 +18,22 @@ public class InformeProyectoDto {
 	private Timestamp fechaEnvioInforme;
 	private char esDecimoAnio;
 	
+	public InformeProyectoDto(Long idInforme, short idProyecto, short anio, String numeroConvocatoria,
+			String cveInstitucion, String usuario, Timestamp fechaRegistroInforme, String cveTipoInforme,
+			String cveStatusInforme, Timestamp fechaEnvioInforme, char esDecimoAnio) {
+		super();
+		this.idInforme = idInforme;
+		this.idProyecto = idProyecto;
+		this.anio = anio;
+		this.numeroConvocatoria = numeroConvocatoria;
+		this.cveInstitucion = cveInstitucion;
+		this.usuario = usuario;
+		this.fechaRegistroInforme = fechaRegistroInforme;
+		this.cveTipoInforme = cveTipoInforme;
+		this.cveStatusInforme = cveStatusInforme;
+		this.fechaEnvioInforme = fechaEnvioInforme;
+		this.esDecimoAnio = esDecimoAnio;
+	}
 	public Long getIdInforme() {
 		return idInforme;
 	}
@@ -41,6 +58,13 @@ public class InformeProyectoDto {
 	public void setNumeroConvocatoria(String numeroConvocatoria) {
 		this.numeroConvocatoria = numeroConvocatoria;
 	}
+	public String getCveTipoInforme() {
+		return cveTipoInforme;
+	}
+	public void setCveTipoInforme(String cveTipoInforme) {
+		this.cveTipoInforme = cveTipoInforme;
+	}
+	
 	public String getCveInstitucion() {
 		return cveInstitucion;
 	}
@@ -58,12 +82,6 @@ public class InformeProyectoDto {
 	}
 	public void setFechaRegistroInforme(Timestamp fechaRegistroInforme) {
 		this.fechaRegistroInforme = fechaRegistroInforme;
-	}
-	public String getCveTipoInforme() {
-		return cveTipoInforme;
-	}
-	public void setCveTipoInforme(String cveTipoInforme) {
-		this.cveTipoInforme = cveTipoInforme;
 	}
 	public String getCveStatusInforme() {
 		return cveStatusInforme;

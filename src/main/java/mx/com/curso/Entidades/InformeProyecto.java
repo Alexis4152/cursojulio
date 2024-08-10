@@ -3,29 +3,16 @@ package mx.com.curso.Entidades;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "INFORME_PROYECTO", schema = "JONATHAN")
 public class InformeProyecto {
 	
-	@Id
-	@Column(name = "ID_INFORME")
-	private Long idInforme;
-	
-	@Id
-	@Column(name = "ID_PROYECTO")
-	private short idProyecto;
-	
-	@Id
-	@Column(name = "ANIO")
-	private short anio;
-	
-	@Id
-	@Column(name = "NUMERO_CONVOCATORIA", length = 20)
-	private String numeroConvocatoria;
+	@EmbeddedId
+	private InformeProyectoPrimaryKey id;
 	
 	@Column(name = "CVE_INSTITUCION", length = 20)
 	private String cveInstitucion;
@@ -36,10 +23,6 @@ public class InformeProyecto {
 	@Column(name = "FECHA_REGISTRO_INFORME")
 	private Timestamp fechaRegistroInforme;
 	
-	@Id
-	@Column(name = "CVE_TIPO_INFORME")
-	private String cveTipoInforme;
-	
 	@Column(name = "CVE_ESTATUS_INFORME")
 	private String cveStatusInforme;
 	
@@ -49,36 +32,13 @@ public class InformeProyecto {
 	@Column(name = "ES_DECIMO_ANIO")
 	private char esDecimoAnio;
 
-	public Long getIdInforme() {
-		return idInforme;
+	
+	public InformeProyectoPrimaryKey getId() {
+		return id;
 	}
 
-	public void setIdInforme(Long idInforme) {
-		this.idInforme = idInforme;
-	}
-
-	public short getIdProyecto() {
-		return idProyecto;
-	}
-
-	public void setIdProyecto(short idProyecto) {
-		this.idProyecto = idProyecto;
-	}
-
-	public short getAnio() {
-		return anio;
-	}
-
-	public void setAnio(short anio) {
-		this.anio = anio;
-	}
-
-	public String getNumeroConvocatoria() {
-		return numeroConvocatoria;
-	}
-
-	public void setNumeroConvocatoria(String numeroConvocatoria) {
-		this.numeroConvocatoria = numeroConvocatoria;
+	public void setId(InformeProyectoPrimaryKey id) {
+		this.id = id;
 	}
 
 	public String getCveInstitucion() {
@@ -105,14 +65,6 @@ public class InformeProyecto {
 		this.fechaRegistroInforme = fechaRegistroInforme;
 	}
 
-	public String getCveTipoInforme() {
-		return cveTipoInforme;
-	}
-
-	public void setCveTipoInforme(String cveTipoInforme) {
-		this.cveTipoInforme = cveTipoInforme;
-	}
-
 	public String getCveStatusInforme() {
 		return cveStatusInforme;
 	}
@@ -128,4 +80,13 @@ public class InformeProyecto {
 	public void setFechaEnvioInforme(Timestamp fechaEnvioInforme) {
 		this.fechaEnvioInforme = fechaEnvioInforme;
 	}
+
+	public char getEsDecimoAnio() {
+		return esDecimoAnio;
+	}
+
+	public void setEsDecimoAnio(char esDecimoAnio) {
+		this.esDecimoAnio = esDecimoAnio;
+	}
+	
 }

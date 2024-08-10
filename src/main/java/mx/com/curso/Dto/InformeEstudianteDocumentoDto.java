@@ -14,6 +14,22 @@ public class InformeEstudianteDocumentoDto {
 	private String cveTipoDocumentoDto;
 	private String nombreDocumentoDto;
 	private Timestamp fechaRegistroDto;
+		
+	public InformeEstudianteDocumentoDto(Long idInformeDto, char cveTipoInformeDto, short idProyectoDto, short anioDto,
+			String numeroConvocatoriaDto, String cveInstitucionDto, short numeroCatedraDto, String cveTipoDocumentoDto,
+			String nombreDocumentoDto, Timestamp fechaRegistroDto) {
+		super();
+		this.idInformeDto = idInformeDto;
+		this.cveTipoInformeDto = cveTipoInformeDto;
+		this.idProyectoDto = idProyectoDto;
+		this.anioDto = anioDto;
+		this.numeroConvocatoriaDto = numeroConvocatoriaDto;
+		this.cveInstitucionDto = cveInstitucionDto;
+		this.numeroCatedraDto = numeroCatedraDto;
+		this.cveTipoDocumentoDto = cveTipoDocumentoDto;
+		this.nombreDocumentoDto = nombreDocumentoDto;
+		this.fechaRegistroDto = fechaRegistroDto;
+	}
 	
 	public Long getIdInformeDto() {
 		return idInformeDto;

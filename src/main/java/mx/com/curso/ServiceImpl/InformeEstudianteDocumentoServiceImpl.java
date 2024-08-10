@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mx.com.curso.Dto.InformeEstudianteDocumentoDto;
 import mx.com.curso.Dto.ResponseDto;
 import mx.com.curso.Entidades.InformeEstudianteDocumento;
+import mx.com.curso.Entidades.InformeEstudianteDocumentoPrimaryKey;
 import mx.com.curso.Repository.InformeEstudianteDocumentoDAO;
 import mx.com.curso.Service.InformeEstudianteDocumentoService;
 
@@ -17,101 +19,41 @@ public class InformeEstudianteDocumentoServiceImpl implements InformeEstudianteD
 	private InformeEstudianteDocumentoDAO informeEstudianteDocumentoDAO;
 
 	@Override
-	public List<InformeEstudianteDocumento> obtieneListaInformeEstudianteDocumento() {
-		
-		List<InformeEstudianteDocumento> listaInformeEstudiante = informeEstudianteDocumentoDAO.obtieneListaInformeEstudianteDocumento();
-		
+	public List<InformeEstudianteDocumento> getListInformeEstudianteDocumento() {
+		List<InformeEstudianteDocumento> listaInformeEstudiante = informeEstudianteDocumentoDAO.getListInformeEstudianteDocumento();
 		return listaInformeEstudiante;
 	}
 
 	@Override
-	public ResponseDto insertInformeEstudianteDocumento(InformeEstudianteDocumento datos) {
-		ResponseDto response  = new ResponseDto();
-		
-		try {
-			InformeEstudianteDocumento datosInforme = new InformeEstudianteDocumento();
-			if (datos != null) {
-								
-				datosInforme.setIdInforme(datos.getIdInforme());
-				datosInforme.setCveTipoInforme(datos.getCveTipoInforme());
-				datosInforme.setIdProyecto(datos.getIdProyecto());
-				datosInforme.setAnio(datos.getAnio());
-				datosInforme.setNumeroConvocatoria(datos.getNumeroConvocatoria());
-				datosInforme.setCveInstitucion(datos.getCveInstitucion());
-				datosInforme.setNumeroCatedra(datos.getNumeroCatedra());
-				datosInforme.setCveTipoDocumento(datos.getCveTipoDocumento());
-				datosInforme.setNombreDocumento(datos.getNombreDocumento());
-				datosInforme.setFechaRegistro(datos.getFechaRegistro());
-				
-				informeEstudianteDocumentoDAO.create(datosInforme);
-				response.setCode(200);
-				response.setMessage("Datos insertados correctamente...");	
-			} else {
-				response.setCode(100);
-				response.setMessage("Hay datos que vienen vacios");
-			}
-			
-		} catch(Exception e) {
-			response.setCode(500);
-			response.setMessage("Hubo un error dentro de tu codigo, verifica porque e intentalo de nuevo...");
-		}
-		
-		return response;
-	}
-
-	@Override
-	public ResponseDto deleteInformeEstudianteDocumento(InformeEstudianteDocumento datos) {
+	public ResponseDto insertInformeEstudianteDocumento(InformeEstudianteDocumentoDto datos) {
 		ResponseDto response = new ResponseDto();
+		InformeEstudianteDocumentoPrimaryKey pk = new InformeEstudianteDocumentoPrimaryKey();
+		pk.setIdInforme(datos.getIdInformeDto());
+		pk.setCveTipoInforme(datos.getCveTipoInformeDto());
+		pk.setIdProyecto(datos.getIdProyectoDto());
+		pk.setAnio(datos.getAnioDto());
+		pk.setNumeroConvocatoria(datos.getNumeroConvocatoriaDto());
+		pk.setCveInstitucion(datos.getCveInstitucionDto());
+		pk.setNumeroCatedra(datos.getNumeroCatedraDto());
+		pk.setCveTipoDocumento(datos.getCveTipoDocumentoDto());
 		
-		try {
-			if (datos.getIdInforme() != null && datos.getIdInforme() != 0) {
-				informeEstudianteDocumentoDAO.delete(datos.getIdInforme());
-				response.setCode(200);
-				response.setMessage("El registro se elimino correctamente");
-			} else {
-				response.setCode(100);
-				response.setMessage("Para eliminar la ID del usuario es necesario que no este vacio el campo y mucho menos ser igual o menor a 0");
-			}
-			
-		} catch (Exception e) {
-			response.setCode(500);
-			response.setMessage("Hubo un error dentro de tu codigo, verifica porque e intentalo de nuevo...");
+		InformeEstudianteDocumento informeDatos = new InformeEstudianteDocumento();
+		informeDatos.setId(pk);
+		informeDatos.setNombreDocumento(datos.getNombreDocumentoDto());
+		informeDatos.setFechaRegistro(datos.getFechaRegistroDto());
+		
+		if (datos != null) {
+			informeEstudianteDocumentoDAO.create(informeDatos);
+			response.setCode(200);
+			response.setMessage("Datos de la tabla INFORME_ESTUDIANTE_DOCUMENTO fueron insertados correctamente");
+		} else {
+			response.setCode(100);
+			response.setContent(informeDatos);
+			response.setMessage("Informe proyecto NO encontrado");
 		}
+		
+		
+		
 		return response;
 	}
-
-	@Override
-	public ResponseDto updateInformeEstudianteDocumento(InformeEstudianteDocumento datos) {
-		ResponseDto response = new ResponseDto();
-		
-		try {
-			InformeEstudianteDocumento updateDatosInforme = new InformeEstudianteDocumento();
-			if (datos.getIdInforme() != null && datos.getIdInforme() != 0) {
-				updateDatosInforme.setIdInforme(datos.getIdInforme());
-				updateDatosInforme.setCveTipoInforme(datos.getCveTipoInforme());
-				updateDatosInforme.setIdProyecto(datos.getIdProyecto());
-				updateDatosInforme.setAnio(datos.getAnio());
-				updateDatosInforme.setNumeroConvocatoria(datos.getNumeroConvocatoria());
-				updateDatosInforme.setCveInstitucion(datos.getCveInstitucion());
-				updateDatosInforme.setNumeroCatedra(datos.getNumeroCatedra());
-				updateDatosInforme.setCveTipoDocumento(datos.getCveTipoDocumento());
-				updateDatosInforme.setNombreDocumento(datos.getNombreDocumento());
-				updateDatosInforme.setFechaRegistro(datos.getFechaRegistro());
-				
-				informeEstudianteDocumentoDAO.update(updateDatosInforme);
-				response.setCode(200);
-				response.setMessage("Datos actualizados correctamente...");	
-				
-			} else {
-				response.setCode(100);
-				response.setMessage("Para eliminar la ID del usuario es necesario que no este vacio el campo y mucho menos ser igual o menor a 0");
-			}
-		} catch (Exception e) {
-			response.setCode(500);
-			response.setMessage("Hubo un error dentro de tu codigo, verifica porque e intentalo de nuevo...");
-		}
-		return response;
-	}
-	
-	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,59 +13,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import mx.com.curso.Dto.InformeEstudianteDocumentoDto;
 import mx.com.curso.Dto.ResponseDto;
-import mx.com.curso.Dto.TransaccionesDto;
+import mx.com.curso.Dto.UsuariosAdminDto;
 import mx.com.curso.Entidades.InformeEstudianteDocumento;
+import mx.com.curso.Entidades.InformeProyecto;
 import mx.com.curso.Service.InformeEstudianteDocumentoService;
 
 @Controller
-@RequestMapping(value = "api/informeEstudianteDocumento")
+@RequestMapping(value = "api/InformeEstudianteDocumento")
 public class InformeEstudianteDocumentoController {
 	
 	final HttpHeaders httpHeaders = new HttpHeaders();
-	ResponseDto response = new ResponseDto();
 	
 	@Autowired
 	private InformeEstudianteDocumentoService informeEstudianteDocumentoService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/getListInformeEstudianteDocumento", method = RequestMethod.GET, produces = "application/json")
-	ResponseEntity<List<InformeEstudianteDocumento>> getInformeEstudianteDocumento() {
-		final HttpHeaders httpHeaders = new HttpHeaders();
+	ResponseEntity<List<InformeEstudianteDocumento>> getListInformeEstudianteDocumento() {
 		
-		List<InformeEstudianteDocumento> informeEstudiantedocumento = informeEstudianteDocumentoService.obtieneListaInformeEstudianteDocumento();
+		List<InformeEstudianteDocumento> informeEstudiante = informeEstudianteDocumentoService.getListInformeEstudianteDocumento();
 		
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		return ResponseEntity.ok().headers(httpHeaders).body(informeEstudiantedocumento);
+		return ResponseEntity.ok().headers(httpHeaders).body(informeEstudiante);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/insertInformeEstudianteDocumento", method = RequestMethod.POST, produces = "application/json")
-	ResponseEntity<ResponseDto> insertInformeEstudianteDocumento(@RequestBody InformeEstudianteDocumento datos) {
-		
-		response = informeEstudianteDocumentoService.insertInformeEstudianteDocumento(datos);
+	ResponseDto insertInformeEstudianteDocumento(@RequestBody InformeEstudianteDocumentoDto datos) {
 
-		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		return ResponseEntity.ok().headers(httpHeaders).body(response);
+		return informeEstudianteDocumentoService.insertInformeEstudianteDocumento(datos);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/deleteInformeEstudianteDocumento", method = RequestMethod.POST, produces = "application/json")
-	ResponseEntity<ResponseDto> deleteInformeEstudianteDocumento(@RequestBody InformeEstudianteDocumento datos) {
-		
-		response = informeEstudianteDocumentoService.deleteInformeEstudianteDocumento(datos);
-
-		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		return ResponseEntity.ok().headers(httpHeaders).body(response);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/updateInformeEstudianteDocumento", method = RequestMethod.POST, produces = "application/json")
-	ResponseEntity<ResponseDto> updateInformeEstudianteDocumento(@RequestBody InformeEstudianteDocumento datos) {
-		
-		response = informeEstudianteDocumentoService.updateInformeEstudianteDocumento(datos);
-
-		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		return ResponseEntity.ok().headers(httpHeaders).body(response);
-	}
 }
+
+
+
+
+
+
+
+
+
+/* INFORME_PROYECTO
+ * GENERAR UN SERVICIO QUE CONSULTE TODOS LOS REGISTROS DEL AÑO 2024 Y EL TIPO INFORME SEA EL TRIENAL Y ES_DECIMO_ANIO = 1
+ * 
+ * SOBRE LA CONSULTA DEL PUNTO NUMERO 1 RECORRER CADA UNA Y CREAR LA SIGUIENTE ESTRUCTURA:
+ * DEBE SER 1 PARA ES_DECIMO_ANIO
+ */
