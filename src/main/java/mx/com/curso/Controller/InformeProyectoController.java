@@ -43,8 +43,34 @@ public class InformeProyectoController {
 	
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "/eliminarInforme", method = RequestMethod.POST, produces = "application/json")
+	ResponseDto eliminarInformeProyecto(@RequestBody InformeProyectoDTO datosInforme) {
+		
+		return informeProyectoService.eliminarInformeProyecto(datosInforme);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateInforme", method = RequestMethod.POST, produces = "application/json")
+	ResponseDto updateInforme(@RequestBody InformeProyectoDTO datosInforme) {
+		
+		return informeProyectoService.updateInforme(datosInforme);
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/procesoBatchProyectoInforme", method = RequestMethod.POST, produces = "application/json")
+	ResponseDto procesoBatchProyectoInforme(@RequestBody InformeProyectoDTO datos) {
+		
+		return informeProyectoService.procesoBatchProyectoInforme(datos);
+
+	}
+	
 	
 	
 	
 	
 }// fin de la clase
+

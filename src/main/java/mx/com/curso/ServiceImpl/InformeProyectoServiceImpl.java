@@ -1,5 +1,8 @@
 package mx.com.curso.ServiceImpl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +10,8 @@ import mx.com.curso.Dto.InformeProyectoDTO;
 import mx.com.curso.Dto.ResponseDto;
 import mx.com.curso.Entidades.InformeProyecto;
 import mx.com.curso.Entidades.InformeProyectoId;
+import mx.com.curso.Entidades.RegistroInformacion;
+import mx.com.curso.Entidades.UsuariosAdmin;
 import mx.com.curso.Repository.InformeProyectoDAO;
 import mx.com.curso.Service.InformeProyectoService;
 
@@ -16,6 +21,11 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 
 	@Autowired
 	private InformeProyectoDAO informeProyectoDAO;
+	
+//	@Autowired
+//	private NUEWDAO_NEWENTIDAD DAO;
+	
+	
 
 	
 	@Override
@@ -30,6 +40,12 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 		id.setCveTipoInforme(datos.getCveTipoInforme());
 		
 		InformeProyecto resultado = informeProyectoDAO.read(id); // select * from tabla where id1 = ? and id2 = ? and......
+		
+//		System.out.println(resultado.getId().getIdInforme()); // extraer PK
+//		System.out.println(resultado.getId().getIdProyecto());
+//		
+//		System.out.println(resultado.getEsDecimoAnio()); // extraer NO LLAVES PK Si no campos normal
+//		System.out.println(resultado.getUsuario() );
 		
 		if(resultado != null) {
 			response.setCode(200);
@@ -73,6 +89,105 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 		
 		return new ResponseDto(200, "Informe registrado con exito");
 	}
+
+
+
+	@Override
+	public ResponseDto eliminarInformeProyecto(InformeProyectoDTO datosInforme) {
+//		delete from tabla where id= 1;
+		try {
+			
+		InformeProyectoId idDelet = new InformeProyectoId();
+		idDelet.setAnio(datosInforme.getAnio());
+		idDelet.setCveTipoInforme(datosInforme.getCveTipoInforme());
+		idDelet.setIdInforme(datosInforme.getIdInforme());
+		idDelet.setIdProyecto(datosInforme.getIdProyecto());
+		idDelet.setNumeroConvocatoria(datosInforme.getNumeroConvocatoria());
+		
+//		JDBC -> delete from tabla where id_anio= 1 and id:informe = ?; 
+		
+		informeProyectoDAO.delete(idDelet);
+		
+		} catch (Exception e) {
+			return new ResponseDto(500, "Ocurrio un error en el server");	
+		}
+		
+		return new ResponseDto(200, "Se elimino el informe");
+	}
+
+
+	
+
+	@Override
+	public ResponseDto updateInforme(InformeProyectoDTO datosInforme) {
+		
+		InformeProyectoId idDelet = new InformeProyectoId();
+		idDelet.setAnio(datosInforme.getAnio());
+		idDelet.setCveTipoInforme(datosInforme.getCveTipoInforme());
+		idDelet.setIdInforme(datosInforme.getIdInforme());
+		idDelet.setIdProyecto(datosInforme.getIdProyecto());
+		idDelet.setNumeroConvocatoria(datosInforme.getNumeroConvocatoria());
+		
+		InformeProyecto informeEntity = new InformeProyecto();
+		informeEntity.setId(idDelet);
+		informeEntity.setUsuario(datosInforme.getUsuario());
+		informeEntity.setFechaRegistroInforme(datosInforme.getFechaRegistroInforme());
+		informeEntity.setFechaEnvioInforme(datosInforme.getFechaEnvioInforme());
+		informeEntity.setCveEstatusInforme(datosInforme.getCveEstatusInforme());
+		informeEntity.setCveInstitucion(datosInforme.getCveInstitucion());
+		informeEntity.setEsDecimoAnio(datosInforme.getEsDecimoAnio());
+		
+		informeProyectoDAO.update(informeEntity);
+		
+		return new ResponseDto(200, "Se actualizo el informe");
+	}
+
+
+
+	@Override
+	public ResponseDto procesoBatchProyectoInforme(InformeProyectoDTO datos) {
+		
+		List<InformeProyecto> listaInformesProy = informeProyectoDAO.procesoBatchProyectoInforme(datos);
+		String resultadoInforme = null;
+		String estatusTxt = null;
+		
+		System.out.println("1.- Lista normal -> " + listaInformesProy);
+		System.out.println("2.- Lista de informe -> " + listaInformesProy.size());
+	
+		for(InformeProyecto datosInforme : listaInformesProy) {
+			System.out.println("3.- Lista normal -> " + datosInforme.getUsuario());
+			System.out.println("4.- Lista normal -> " + datosInforme.getId().getIdInforme());
+//			RESULTADO = (ANIO)_(ID_PROYECTO)_(NUMERO_CONVOCATORIA)_(CVE_ESTATUS_INFORME)_(ES_DECIMO_ANIO)
+//					----------> 2014_500_CATEDRAS-2014-01_2_1_Fecha_actual->(YYYY-MM-DD HR-MM-SS)-> fecha en que se procesa la información
+			resultadoInforme = datosInforme.getId().getAnio()+"_"+datosInforme.getId().getIdProyecto()+"_"+
+					datosInforme.getId().getNumeroConvocatoria()+"_"+datosInforme.getId().getCveTipoInforme()+"_"+
+					datosInforme.getEsDecimoAnio()+"_"+new Date();
+			
+			RegistroInformacion entity = new  RegistroInformacion();
+//			entity.setId(id); -- autoincrementable por medio de la secuencia que viene de oracle
+			entity.setUsuario(datosInforme.getUsuario());
+			entity.setFechaActual(new Date()); // extrae la fecha actual
+			entity.setNumeroProyecto(datosInforme.getId().getIdProyecto());
+//			entity.setResultadoInforme(resultadoInforme);
+			
+			if(datosInforme.getCveEstatusInforme()==1) {
+				estatusTxt = "En captura";
+			}else {
+				estatusTxt = "Enviado";
+			}
+			
+			System.out.println("5.- estatusTxt -> " + estatusTxt);
+			
+			entity.setStatus(estatusTxt);
+//			informeProyectoDAO.create(entity); // registrar iformacion a la nueva tabla
+			
+		}
+		
+		return null;
+	}
+	
+// Yo quiero recorrer una lista de datos en java usando spring como lo hago?
+// Yo quiero juntar informecion dentro de un for en java
 	
 	
 	
@@ -82,9 +197,12 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 De preferencia con hibernate/ si no con JDBC -> ESto es solo para entregar FUNCIONALIDAD
 
 1.- Un servicio que consulte todos los registros del año = 2014 y el tipo informe sea el trienal y ES_DECIMO_ANIO = 1
+----------------------
+SELECT * FORM INFORME_PROYECTO WHERE ANIO = 2014 AND CVE_TIPO_INFORME = 2 AND  ES_DECIMO_ANIO = 1;
 
 1.2.- Sobre la consulta del punto #1 recorrer cada una y crear la siguiente estrutura:
 
+--> Aqui deje un detalle no se como hacer lo de la fecha -->(pendiente revisarlo al final)<<<<-----------------
 RESULTADO = (ANIO)_(ID_PROYECTO)_(NUMERO_CONVOCATORIA)_(CVE_ESTATUS_INFORME)_(ES_DECIMO_ANIO)
 ----------> 2014_500_CATEDRAS-2014-01_2_1_Fecha_actual->(YYYY-MM-DD HR-MM-SS)-> fecha en que se procesa la información
 
@@ -100,8 +218,20 @@ Estatus = 1 = en capotura o 2 = enviados SE DEBE REGISTRA EN ESTATUS EN TEXTO ->
 }
 
 
+---------------------------
+1.- Crear una tabla de bitacora => BITACORA_INFORME_ESTATUS
+ID_PROYECTO
+USUARIO
+FECHA_ACTUAL
+ESTATUS
+fechaRegistroInforme
+fechaEnvioInforme
+Estatus -> Estatus = 1 = en capotura o 2 = enviados-> Crean un campo con nombre BANDERA_TRANSACCION
+ ->Si Estatus = 1 => 01_ACTIVO
+ ->Si Estatus = 2 => 02_EN_PROCESO_DE_VALIDACION
 
-
+Campo: FOLIO_PROYECTO -> (AÑO tomar las ultimas 2 cifras)ID_PROYECTO
+==>EJEMPLO-> año=2014 y idProyecto=2240 Resultado => 142240
 
 
 

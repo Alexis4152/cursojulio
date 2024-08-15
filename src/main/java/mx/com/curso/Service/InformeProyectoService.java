@@ -9,4 +9,10 @@ public interface InformeProyectoService {
 
 	ResponseDto registrarNuevoInforme(InformeProyectoDTO datosInforme);
 
+	ResponseDto eliminarInformeProyecto(InformeProyectoDTO datosInforme);
+
+	ResponseDto updateInforme(InformeProyectoDTO datosInforme);
+
+	ResponseDto procesoBatchProyectoInforme(InformeProyectoDTO datos);
+
 }
