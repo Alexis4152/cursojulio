@@ -13,13 +13,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "REGISTRO_INFORMACION_STATUS", schema = "XXX")
+@Table(name = "REGISTRO_INFORMACION_STATUS", schema = "ISAUL")
 public class RegistroInformacion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_INFORME_USUARIO_STATUS")
 	@SequenceGenerator(name = "SEQ_INFORME_USUARIO_STATUS", sequenceName = "SEQ_INFORME_USUARIO_STATUS", allocationSize = 1)
-	@Column(name = "ID_INFORME_USUARIO")
+	@Column(name = "ID_INFORME_STATUS")
 	private Long id;
 
 	@Column(name = "USUARIO")
@@ -34,6 +34,9 @@ public class RegistroInformacion {
 
 	@Column(name = "STATUS")
 	private String status;
+	
+	@Column(name = "CADENA_ORIGINAL")
+	private String cadenaOriginal;
 
 	public Long getId() {
 		return id;
@@ -73,6 +76,14 @@ public class RegistroInformacion {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getCadenaOriginal() {
+		return cadenaOriginal;
+	}
+
+	public void setCadenaOriginal(String cadenaOriginal) {
+		this.cadenaOriginal = cadenaOriginal;
 	}
 
 }

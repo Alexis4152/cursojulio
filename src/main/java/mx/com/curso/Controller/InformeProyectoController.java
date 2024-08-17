@@ -33,6 +33,18 @@ public class InformeProyectoController {
 
 	}
 	
+/*
+
+ EndPoint: api/informeProyecto/getUsuariosByIdRead
+
+int IdInforme();
+int IdProyecto();
+short Anio();
+string NumeroConvocatoria();
+int CveTipoInforme();
+
+	 */
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/nuevoInforme", method = RequestMethod.POST, produces = "application/json")

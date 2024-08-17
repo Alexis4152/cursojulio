@@ -13,6 +13,7 @@ import mx.com.curso.Entidades.InformeProyectoId;
 import mx.com.curso.Entidades.RegistroInformacion;
 import mx.com.curso.Entidades.UsuariosAdmin;
 import mx.com.curso.Repository.InformeProyectoDAO;
+import mx.com.curso.Repository.RegistroInformacionDAO;
 import mx.com.curso.Service.InformeProyectoService;
 
 
@@ -22,8 +23,8 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 	@Autowired
 	private InformeProyectoDAO informeProyectoDAO;
 	
-//	@Autowired
-//	private NUEWDAO_NEWENTIDAD DAO;
+	@Autowired
+	private RegistroInformacionDAO registroInformacionDAO;
 	
 	
 
@@ -164,29 +165,29 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 					datosInforme.getEsDecimoAnio()+"_"+new Date();
 			
 			RegistroInformacion entity = new  RegistroInformacion();
-//			entity.setId(id); -- autoincrementable por medio de la secuencia que viene de oracle
+//			entity.setId(1L); //-- autoincrementable por medio de la secuencia que viene de oracle
 			entity.setUsuario(datosInforme.getUsuario());
 			entity.setFechaActual(new Date()); // extrae la fecha actual
 			entity.setNumeroProyecto(datosInforme.getId().getIdProyecto());
-//			entity.setResultadoInforme(resultadoInforme);
+			entity.setCadenaOriginal(resultadoInforme);
+			entity.setStatus(datosInforme.getCveEstatusInforme() == 1 ? "En captura" : "Enviado");
 			
-			if(datosInforme.getCveEstatusInforme()==1) {
-				estatusTxt = "En captura";
-			}else {
-				estatusTxt = "Enviado";
-			}
+//			if(datosInforme.getCveEstatusInforme()==1) {
+//				estatusTxt = "En captura";
+//			}else {
+//				estatusTxt = "Enviado";
+//			}
+//			System.out.println("5.- estatusTxt -> " + estatusTxt);
+//			entity.setStatus(estatusTxt);
 			
-			System.out.println("5.- estatusTxt -> " + estatusTxt);
-			
-			entity.setStatus(estatusTxt);
-//			informeProyectoDAO.create(entity); // registrar iformacion a la nueva tabla
+			registroInformacionDAO.create(entity); // registrar iformacion a la nueva tabla
 			
 		}
 		
 		return null;
 	}
 	
-// Yo quiero recorrer una lista de datos en java usando spring como lo hago?
+// Yo quiero recorrer una lista de datos en java
 // Yo quiero juntar informecion dentro de un for en java
 	
 	
@@ -212,7 +213,7 @@ Usuario:X_dnoriega1439
 Fecha actual: fecha en que se guarda ese registro
 Numero de proyecto
 Estatus = 1 = en capotura o 2 = enviados SE DEBE REGISTRA EN ESTATUS EN TEXTO -> En captura/ Enviado
-
+guardar en un campo: RESULTADO
 
 
 }
@@ -223,7 +224,6 @@ Estatus = 1 = en capotura o 2 = enviados SE DEBE REGISTRA EN ESTATUS EN TEXTO ->
 ID_PROYECTO
 USUARIO
 FECHA_ACTUAL
-ESTATUS
 fechaRegistroInforme
 fechaEnvioInforme
 Estatus -> Estatus = 1 = en capotura o 2 = enviados-> Crean un campo con nombre BANDERA_TRANSACCION
@@ -234,8 +234,64 @@ Campo: FOLIO_PROYECTO -> (AÑO tomar las ultimas 2 cifras)ID_PROYECTO
 ==>EJEMPLO-> año=2014 y idProyecto=2240 Resultado => 142240
 
 
-
 */
+	
+/* ---------------  TODO LO VISTO EN EL CURSO -----------------
+
+1.-
+En el curso usamos conexion normal: Conexion a oracle simple: DRIVER LA CONEXIO, USUARIO, PASWW...lo que esta en el properties
+JNDI -> (JNDI_cursoJulio)
+
+cursoJulio.war
+
+YOUTUBE
+1.- Como configurar mi JNDI si mi proyecto lo usa, trabajando con tomcat
+2.- Explicacion de un JNDI
+
+
+-------------------------------------------------------------------------------------------------------
+
+1.- Oracle 11g: CRUD, SP, SECUENCIAS, TRIGGERS.....
+2.- Java 8
+3.- Spring Framework 4.0 ->{
+ 3.1-> MVC->Modelo vista controlador
+ 3.2-> Spring security -> Darle seguridad al proyecto web -> {
+ 		JWT = Json Web Token <--- Generar token para la seguridad que permitan consumir los servicios
+ }
+ 3.3-> DAO ->va enfocado a hibernate
+ 3.4-> ORM
+ 3.5->.....
+4.- Framework de Hibernate 4.0 para consultas por medio de entidades
+5.- Postman
+6.- Git bash/GitHub
+
+
+---------------------------------------------------------------------------------
+Spring Framework -> Soporta el BackEnd/FrontEnd
+-> scr/main/webapp/index.jsp
+-> Vistas => .jsp => .html NO ES UN LENGUAJE DE PROGRAMMACION-> Diseño
+-> JS=>(JavaScript) -> SI ES UN LENGUAJE DE PROGRAMACION -> Movimiento/funcion a la pagina -> Tengo un boton cuando yo le de clic me muestra un mensaje
+
+
+}
+
+
+4.-
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+	
+	
 	
 	
 	
