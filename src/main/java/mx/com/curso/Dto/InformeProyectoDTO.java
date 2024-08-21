@@ -1,5 +1,6 @@
 package mx.com.curso.Dto;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class InformeProyectoDTO {
@@ -43,8 +44,7 @@ public class InformeProyectoDTO {
 		super();
 	}
 
-
-
+	
 
 	public String getUsuario() {
 		return usuario;
@@ -55,8 +55,13 @@ public class InformeProyectoDTO {
 	public Date getFechaRegistroInforme() {
 		return fechaRegistroInforme;
 	}
-	public void setFechaRegistroInforme(Date fechaRegistroInforme) {
-		this.fechaRegistroInforme = fechaRegistroInforme;
+	public void setFechaRegistroInforme(int year) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, Calendar.JANUARY);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		
+		this.fechaRegistroInforme = calendar.getTime();
 	}
 	public Date getFechaEnvioInforme() {
 		return fechaEnvioInforme;
