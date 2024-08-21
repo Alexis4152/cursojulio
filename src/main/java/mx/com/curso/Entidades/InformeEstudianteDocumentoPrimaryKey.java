@@ -41,6 +41,23 @@ public class InformeEstudianteDocumentoPrimaryKey implements Serializable{
 	private String cveTipoDocumento;
 
 
+	public InformeEstudianteDocumentoPrimaryKey(Long idInforme, char cveTipoInforme, short idProyecto, short anio,
+			String numeroConvocatoria, String cveInstitucion, short numeroCatedra, String cveTipoDocumento) {
+		super();
+		this.idInforme = idInforme;
+		this.cveTipoInforme = cveTipoInforme;
+		this.idProyecto = idProyecto;
+		this.anio = anio;
+		this.numeroConvocatoria = numeroConvocatoria;
+		this.cveInstitucion = cveInstitucion;
+		this.numeroCatedra = numeroCatedra;
+		this.cveTipoDocumento = cveTipoDocumento;
+	}
+
+	public InformeEstudianteDocumentoPrimaryKey() {
+		
+	}
+	
 	public Long getIdInforme() {
 		return idInforme;
 	}

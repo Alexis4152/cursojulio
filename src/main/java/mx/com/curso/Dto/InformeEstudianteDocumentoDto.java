@@ -31,6 +31,10 @@ public class InformeEstudianteDocumentoDto {
 		this.fechaRegistroDto = fechaRegistroDto;
 	}
 	
+	public InformeEstudianteDocumentoDto () {
+		
+	}
+	
 	public Long getIdInformeDto() {
 		return idInformeDto;
 	}

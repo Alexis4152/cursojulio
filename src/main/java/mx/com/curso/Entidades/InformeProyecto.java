@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "INFORME_PROYECTO", schema = "ISAUL")
+@Table(name = "INFORME_PROYECTO", schema = "JONATHAN_R")
 public class InformeProyecto implements Serializable { //Serializable = indica que estos datos se manejan con formato JSON
 
    private static final long serialVersionUID = 7357400110774785609L;

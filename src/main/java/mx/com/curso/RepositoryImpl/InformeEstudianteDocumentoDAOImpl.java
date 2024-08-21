@@ -1,12 +1,15 @@
 package mx.com.curso.RepositoryImpl;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import mx.com.curso.Entidades.InformeEstudianteDocumento;
@@ -27,3 +30,20 @@ public class InformeEstudianteDocumentoDAOImpl extends GenericDAO<InformeEstudia
 		return (List<InformeEstudianteDocumento>) criteria.list();
 	}
 }
+
+/*
+ * 		Date fecha = datos.getFechaRegistroInforme();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String fechaFormateada = sdf.format(fecha);
+		
+		
+		int year = fecha.getYear();
+		LocalDate startDate = LocalDate.of(year, 1, 1);
+		
+		LocalDate endDate = LocalDate.of(year, 12, 31);
+		
+		Date start = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date end = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	
+		
+ */
