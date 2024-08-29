@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import mx.com.curso.Entidades.EmpleadosIsaul;
 import mx.com.curso.Entidades.InformeProyecto;
 import mx.com.curso.Entidades.RegistroInformacion;
 import mx.com.curso.Entidades.UsuariosAdmin;
@@ -36,7 +37,7 @@ public class ApplicationContextConfig {
     public SessionFactory getSessionFactory(DataSource dataSource) {
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
-    	sessionBuilder.addAnnotatedClasses(UsuariosAdmin.class, InformeProyecto.class, RegistroInformacion.class); // Declarar todas clases Entitys para poder hacer las transacciones por Hibernate.
+    	sessionBuilder.addAnnotatedClasses(UsuariosAdmin.class, InformeProyecto.class, RegistroInformacion.class, EmpleadosIsaul.class); // Declarar todas clases Entitys para poder hacer las transacciones por Hibernate.
     	return sessionBuilder.buildSessionFactory();
     }
     

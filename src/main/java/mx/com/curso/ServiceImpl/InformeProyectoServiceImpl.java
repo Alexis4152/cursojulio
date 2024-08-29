@@ -151,6 +151,8 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 		List<InformeProyecto> listaInformesProy = informeProyectoDAO.procesoBatchProyectoInforme(datos);
 		String resultadoInforme = null;
 		String estatusTxt = null;
+		String anio = null;
+		String proyecto = null;
 		
 		System.out.println("1.- Lista normal -> " + listaInformesProy);
 		System.out.println("2.- Lista de informe -> " + listaInformesProy.size());
@@ -182,7 +184,29 @@ public class InformeProyectoServiceImpl implements InformeProyectoService {
 			
 			registroInformacionDAO.create(entity); // registrar iformacion a la nueva tabla
 			
+/*			
+BITACORA_INFORME_ESTATUS bitacora = new BITACORA_INFORME_ESTATUS();
+bitacora.setIdproyecto(datosInforme.getId().getIdProyecto());
+bitacora.setUsuario(datosInforme.getUsuario());
+bitacora.setFechaActual(new Date());
+bitacora.setFechaRegistroInforme(datosInforme.getFechaRegistroInforme());
+bitacora.setFechaEnvioInforme(datosInforme.getFechaEnvioInforme());
+bitacora.setEstatus(datosInforme.getCveEstatusInforme() == 1 ? "01_ACTIVO" : "02_EN_PROCESO_DE_VALIDACION");
+
+anio = (datosInforme.getId().getAnio()).subSrting(2); -> 2024 = 24
+bitacora.setFolio(anio+datosInforme.getId().getIdProyecto());v = 241515
+
+DAO.create(bitacora);
+
+
+------------------------------------
+stream() -> agiliza los filtros
+
+
+ */
+			
 		}
+		
 		
 		return null;
 	}
@@ -254,6 +278,7 @@ YOUTUBE
 1.- Oracle 11g: CRUD, SP, SECUENCIAS, TRIGGERS.....
 2.- Java 8
 3.- Spring Framework 4.0 ->{
+
  3.1-> MVC->Modelo vista controlador
  3.2-> Spring security -> Darle seguridad al proyecto web -> {
  		JWT = Json Web Token <--- Generar token para la seguridad que permitan consumir los servicios
@@ -278,6 +303,81 @@ Spring Framework -> Soporta el BackEnd/FrontEnd
 
 4.-
 
+---> HIBERNATE -> JDBC
+
+NOMBRE_COMPLETO
+RFC
+CURP
+EDAD
+SEXO (Campo que va a recibir M = masculino y F = femenino)
+DIRECCION
+NSS (Campo que va a recibir numeros 10 dijitos)
+TELEFONO
+ACTIVO (Campo que va a recibir 0 = BAJA y 1 = ACTIVO)
+------------------------------------------------------------------
+
+----------      NOTA: Registrar informacion por script y guardar los script    -----------------
+----   NOMBRE_COMPLETO    ---   EDAD - SEXO - ACTIVO
+FABIANA ANDREA ALVAREZ ANRIQUE - 33  -  F   -  0
+CARLOS BORELLO ANRIQUE         - 35  -  M   -  0
+DAVID CASTILLO SALCEDO         - 25  -  M   -  0
+SERGIO ALTAMIRANO RAMIREZ      - 23  -  M   -  1
+ABRIL ACUÑA ALANIZ             - 29  -  F   -  1
+DANIELA CABRERA SILVA          - 25  -  F   -  1
+NATALIA CARRIZO CASAS          - 35  -  F   -  1
+BRISA BARREDA PEREZ            - 35  -  F   -  1
+LUCAS ANRIQUE BARRERA          - 39  -  M   -  1
+ROMINA ARGUELLO ANRIQUE        - 28  -  F   -  1
+
+
+
+==========================================================================================
+=====================================     FASE: 01   ====================================
+===========================================================================================
+
+Tarea: Utilizar Postman
+
+1.- Un service para insertar nuevos empleados
+REGLA I.- Antes de insertar un empleado verificar si ya EXISTE ese usuario en la base de datos
+------------------------------------------------------------------------------------------------------------
+
+2.- Servicio para eliminar un empleado 
+REGLA I.- Se puede eliminar siempre y cuando este dado de baja, si no esta dado de baja
+ese empleado mostrar un mensaje de -> "Imposible eliminar Empleado, Sigue Laborando (Activo)...! ", 
+En caso contrario el siguiente mensaje -> "Empleado eliminado correctamente"
+------------------------------------------------------------------------------------------------------------
+
+3.- Servicio para actualizar los datos de un empleado 
+REGLA I.- Para poder actualizar los datos el empleado debe de estar en estatus ACTIVO 
+(Si no esta activo lanzar el mensaje -> "El empleado esta dado de baja, No puede actualizar su informacion.! ")
+------------------------------------------------------------------------------------------------------------
+
+4.- Servicio para consultar todos los usuarios de sexo Masculino
+------------------------------------------------------------------------------------------------------------
+
+5.- Servicio para consultar todos los usuarios de sexo Femenino de 35 años
+------------------------------------------------------------------------------------------------------------
+
+6.- Servicio para buscar el usuario por RFC
+------------------------------------------------------------------------------------------------------------
+
+
+
+==========================================================================================
+=====================================     FASE: 02   ====================================
+===========================================================================================
+
+El servicio #1.- para insertar nuevos empleados validar con expresiones regulares los siguiente:
+1.- CURP
+1.1.- Si la curp no es correcta mandar mensaje -> ("La curp no cuenta con la estrutura adecuada")
+
+2.- RFC
+2.1.- Si el rfc no es correcta mandar mensaje -> ("El rfc no cuenta con la estrutura adecuada")
+
+3.- NSS -> 
+3.1.- Validar que solo reciba números y no texto, si el usuario ingresa texto informar con un mensaje -> ("El campo nss debe ser númerico")
+3.2.- Validar que nss sea exactamente 10 dijitos, si es menor mandar mensaje -> ("Su nss no cuenta con la estrutura adecuada")
+	
 
 
 
